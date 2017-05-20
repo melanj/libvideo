@@ -24,6 +24,7 @@
 
 #include <sys/ioctl.h>		//for ioctl
 #include <sys/mman.h>		//for mmap
+#include <stdint.h>
 #include "videodev2.h"
 #include "videodev.h"
 #include "libvideo.h"
@@ -403,7 +404,7 @@ void *dequeue_buffer_v4l1(struct video_device *vdev, int *len, unsigned int *ind
 		unsigned long long *capture_time, unsigned long long *sequence) {
 	struct capture_device *c = vdev->capture;
 	struct video_mmap mm;
-	int curr_frame = (int) c->mmap->tmp;
+	int curr_frame = (intptr_t) c->mmap->tmp;
 	int next_frame = curr_frame ^ 1;
 	*len=c->imagesize;
 	dprint(LIBVIDEO_SOURCE_CAP, LIBVIDEO_LOG_DEBUG2,
@@ -433,7 +434,7 @@ void *dequeue_buffer_v4l1(struct video_device *vdev, int *len, unsigned int *ind
 		*len = 0;
 		return NULL;
 	}
-	c->mmap->tmp = (void *)next_frame;
+	c->mmap->tmp = (void *)(intptr_t)next_frame;
 	if (capture_time)
 		*capture_time = 0;
 	if (sequence)
