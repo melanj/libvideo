@@ -188,7 +188,7 @@ static int jpeg_encode_rgb(void *src,int src_len,  struct capture_device *cdev, 
 	}
 	jpeg_finish_compress( &j->cinfo );
 
-	dprint(LOG_SOURCE_JPEG, LOG_LEVEL_DEBUG2, "Compressed %d bytes to %d bytes\n", rgb_size, (rgb_size - j->cinfo.dest->free_in_buffer)) ;
+	dprint(LOG_SOURCE_JPEG, LOG_LEVEL_DEBUG2, "Compressed %d bytes to %zd bytes\n", rgb_size, (rgb_size - j->cinfo.dest->free_in_buffer)) ;
 	return rgb_size - j->cinfo.dest->free_in_buffer;
 }
 
@@ -230,7 +230,7 @@ static int jpeg_encode_yuv(void *src, int src_len, struct capture_device *cdev, 
 	}
 	jpeg_finish_compress(&j->cinfo);
 
-	dprint(LOG_SOURCE_JPEG, LOG_LEVEL_DEBUG2, "Compressed %d bytes to %d bytes\n", rgb_size, (rgb_size - j->cinfo.dest->free_in_buffer));
+	dprint(LOG_SOURCE_JPEG, LOG_LEVEL_DEBUG2, "Compressed %d bytes to %zd bytes\n", rgb_size, (rgb_size - j->cinfo.dest->free_in_buffer));
 	return rgb_size - j->cinfo.dest->free_in_buffer;
 }
 
@@ -290,7 +290,7 @@ static int jpeg_encode_yuyv(void *source, int src_len, struct capture_device *cd
 
 	jpeg_finish_compress (&j->cinfo);
 
-	dprint(LOG_SOURCE_JPEG, LOG_LEVEL_DEBUG2, "Compressed %d bytes to %d bytes\n", rgb_size, (rgb_size - j->cinfo.dest->free_in_buffer));
+	dprint(LOG_SOURCE_JPEG, LOG_LEVEL_DEBUG2, "Compressed %d bytes to %zd bytes\n", rgb_size, (rgb_size - j->cinfo.dest->free_in_buffer));
 	return rgb_size - j->cinfo.dest->free_in_buffer;
 }
 
