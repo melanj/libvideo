@@ -1,7 +1,6 @@
 #!/bin/bash
-branch="$(svn info 2>/dev/null | grep 'URL')" 
-branch="${branch##*/}"
-rev="$(svn info 2>/dev/null | grep 'Revision' | cut -f 2 -d ' ')"
+branch="$(git branch 2>/dev/null | cut -f 2 -d ' ')" 
+rev="$(git rev-parse HEAD 2>/dev/null | cut -f 2 -d ' ')"
 
 if [ "x${rev}" != "x" ]; then
 	echo "#define VER_REV \"${branch}_r${rev}\"" > version.h
