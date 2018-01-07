@@ -263,7 +263,6 @@ void list_cap_param(int newsockfd,struct video_device *d) {
 	ptr += sprintf(ptr,"Content-Type: text/html; charset=utf-8\n");
 	ptr += sprintf(ptr,"\n");
 	ptr += sprintf(ptr,"<html><body>\n");
-	ptr += sprintf(ptr,"<html><body>\n");
 
 	//outputs JPEG quality control setting
 	ptr += sprintf(ptr,"<form method=\"get\"><h4>JPEG quality</h4>Value: %d (min: 0, max: 100, step: 1)<br>\n", jpeg_quality);
