@@ -177,8 +177,8 @@ int main(int argc, char **argv) {
  */
 int setup_tcp_server_sock(int port) {
 	int sockfd, oldflags;
-	struct sockaddr_in serv_addr;
-	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+	struct sockaddr_in6 serv_addr;
+	sockfd = socket(AF_INET6, SOCK_STREAM, 0);
 
 	if (sockfd < 0) {
     	info(LOG_ERR, "Cant open a socket\n");
@@ -192,9 +192,9 @@ int setup_tcp_server_sock(int port) {
 	//fcntl(sockfd, F_SETFL, oldflags | O_NONBLOCK);
 
 	memset(&serv_addr, 0, sizeof(serv_addr));
-	serv_addr.sin_family = AF_INET;
-	serv_addr.sin_addr.s_addr = INADDR_ANY;
-	serv_addr.sin_port = htons(port);
+	serv_addr.sin6_family = AF_INET6;
+	serv_addr.sin6_addr = in6addr_any;
+	serv_addr.sin6_port = htons(port);
 	if (bind(sockfd, (struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) {
 		info(LOG_ERR,  "Cant bind to if/port\n");
 		keep_going = 0;
