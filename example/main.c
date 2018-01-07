@@ -259,6 +259,10 @@ void list_cap_param(int newsockfd,struct video_device *d) {
 
 	XMALLOC(page, char *, PARAM_PAGE_SIZE);
 	ptr = page;
+	ptr += sprintf(ptr,"HTTP/1.1 200 OK\n");
+	ptr += sprintf(ptr,"Content-Type: text/html; charset=utf-8\n");
+	ptr += sprintf(ptr,"\n");
+	ptr += sprintf(ptr,"<html><body>\n");
 	ptr += sprintf(ptr,"<html><body>\n");
 
 	//outputs JPEG quality control setting
